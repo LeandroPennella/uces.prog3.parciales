@@ -1,0 +1,15 @@
+Un teórico matemático quiere corroborar que partiendo de cualquier número entero mayor que cero, se puede llegar al 1, aplicando las siguientes operaciones:
+si el número es par, dividirlo por 2
+si es impar, sumarle 3
+
+Como no se pueden verificar todos los numero existentes, se necesita crear un programa que lea un archivo donde estan los numeros a verificar. Para cada número a verificar, se debe lanzar un thread que verifique el número
+
+para que el thread verifique el número, debe aplicar las operaciones a intervalos regulares de 50 ms hasta que el resultado sea el número 1. Cada vez que aplica una operación, debe incrementar un contador para saber cuantas operaciones fueron necesarias.
+
+Por si se diera el caso en que un número no cumpla con el teorema, a los 5 segundos de haber lanzado todos los threads, el programa principal tiene que cortar la verificación y pasar a mostrar los resultados
+
+Se pide mostrar en pantalla, ordenado por número verificado los siguientes datos:
+número verificado
+operaciones
+ejecutadas
+si se logró verificar el teorema o no
