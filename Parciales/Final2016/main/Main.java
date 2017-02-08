@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Leedor.Leedor;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -13,39 +15,24 @@ public class Main {
 		
 		//abrir
 		String ArchivoConNumeros="numeros.txt";
+		Leedor leedor=new Leedor(ArchivoConNumeros);
+		String cadenaNumeros=leedor.leerPorLinea();
+		int numeros[]=extraerNumeros(cadenaNumeros);
+		for(int i=0;i<numeros.length;i++)
+		{
+			procesar(numeros[i]);
+			
+		}
+	}
+	
 
-	}
 	
-	private String leerArchivo(string nombreArchivo)
+	static private int[] extraerNumeros(String cadenaNumeros)
 	{
-		try {
-			FileReader fr = new FileReader(ArchivoConNumeros);
-            int valor=fr.read();
-            while(valor!=-1){
-                System.out.print((char)valor);
-                valor=fr.read();
-            }
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	}
-	
-	private int[] extraerNumeros(String numerosString)
-	{
-	  String cadena="";
-	  BufferedReader b = new BufferedReader(fr);
-	  
-	  //extraigo string del archivo;
-	  try {
-		while((cadena = b.readLine())!=null) {
-	  }
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+
 	  
 	  //divido en string[] el string
-	  String numerosString[] = cadena.split(",");
+	  String numerosString[] = cadenaNumeros.split(",");
 	  
 	  //convierto string[] en int[]
 	  int numeros[]={};
@@ -55,6 +42,29 @@ public class Main {
 	  }
 	  return numeros;  
 
+	}
+	
+	static private void procesar(int numero)
+	{
+		long TInicio, TFin, tiempo; //Variables para determinar el tiempo de ejecución
+		long IntervaloMaximo=50;
+		TInicio = System.currentTimeMillis(); 
+		int numeroActual=numero;
+		int intentos=0;
+		while (numeroActual!=1 && System.currentTimeMillis()>(TInicio+IntervaloMaximo))
+		{
+			
+			//todo: delay
+			if(numeroActual%2==0)//es par
+			{numeroActual=numeroActual/2;}
+			else
+			{numeroActual+=3;}
+			intentos++;
+		}
+		System.out.println("numero inicizl="+numero);
+		System.out.println("numero final="+numeroActual);
+		System.out.println("intentos="+intentos);
+		
 	}
 
 }
