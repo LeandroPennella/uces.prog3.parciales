@@ -20,3 +20,13 @@ número verificado
 operaciones
 ejecutadas
 si se logró verificar el teorema o no
+
+main
+-leer
+--abrir (manejoDeError)
+--extraer
+--cargar array
+--cerrar (manejoDeError)
+
+-procesar
+--
