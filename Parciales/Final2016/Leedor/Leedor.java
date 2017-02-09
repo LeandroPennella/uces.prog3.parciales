@@ -9,20 +9,45 @@ import java.io.IOException;
 
 public class Leedor {
 	String nombreArchivo;
-	private FileReader fr;
+	private FileReader fr=null;
 	public Leedor(String nombreArchivo){
 		this.nombreArchivo=nombreArchivo;
+		
 		}
 
-	public void abrir(String nombreArchivo)
-	{			
+
+	
+	public String leer() throws Exception
+	{
+		String cadena="";
+		System.out.println("abriendo archivo..");
 		try {
 			 fr = new FileReader(nombreArchivo);
+			 System.out.println("leyendo archivo...");
+			 cadena=leerPorLinea();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new Exception("no se pudo abrir el archivo");
+			//e.printStackTrace();
+		} finally {
+			if (fr!=null)
+			{
+				System.out.println("cerrando...");
+				try {
+					fr.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					throw new Exception("no se pudo cerrar el archivo");
+					
+					
+				}
+			}
+
 		}
+		return cadena;
+
 	}
+	
 	public String leerPorCaracter()
 	{
 		String cadena="";
@@ -46,13 +71,17 @@ public class Leedor {
 	public String leerPorLinea()
 	{		  
 		String cadena="";
+		String linea="";
 		BufferedReader b = new BufferedReader(fr);
-
+		System.out.println("entrando al bucle");
 		//extraigo string del archivo;
 		try {
-			while((cadena += b.readLine())!=null) {
-
+			linea = b.readLine();
+			while(linea!=null){
+				cadena+=linea;
+				linea=b.readLine();
 			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
