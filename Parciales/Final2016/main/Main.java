@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 import Leedor.Leedor;
 
@@ -18,18 +19,23 @@ public class Main {
 		String ArchivoConNumeros="numeros.txt";
 		Leedor leedor=new Leedor(ArchivoConNumeros);
 		String cadenaNumeros="";
-
+		Procesador procesador=new Procesador();
 		try{
 		
 			cadenaNumeros=leedor.leer();
 			System.out.println("cadena="+cadenaNumeros);
-			System.out.println("parseando a int[]...");
+			
+			
+
 			int numeros[]=extraerNumeros(cadenaNumeros);
-			System.out.println(numeros.length+"items extraidos.");
+
+			System.out.println(Arrays.toString(numeros));
+			System.out.println(numeros.length+" items extraidos.");
 			for(int i=0;i<numeros.length;i++)
 			{
-				System.out.println("procesando "+i+" item");
-				procesar(numeros[i]);
+				System.out.println("> procesando "+i+" item");
+				procesador.procesar(numeros[i]);
+				System.out.println("< procesando "+i+" item");
 			}
 		} catch (Exception e)
 		{
@@ -45,44 +51,26 @@ public class Main {
 	static private int[] extraerNumeros(String cadenaNumeros)
 	{
 
-	  System.out.println("diviendo en string[]...");
+
 	  //divido en string[] el string
 	  String numerosString[] = cadenaNumeros.split(",");
 	  
 	  //convierto string[] en int[]
-	  int numeros[]={};
-	  System.out.println("parseando string[] a int...");
+	  int numeros[]=new int[numerosString.length];
+	  //System.out.println("- extraerNumeros - parseando string[] a int[] "+numerosString.length + " elementos" );
+	  
+
 	  for(int i = 0;i < numerosString.length;i++)
 	  {
-		  numeros[i] = Integer.parseInt(numerosString[i]);
+		  //System.out.println("- extraerNumeros - parsea item "+i);
+		  numeros[i] = Integer.parseInt(numerosString[i].trim());
 	  }
+	  
+	  System.out.println("numeros "+numeros.length);
 	  return numeros;  
 
 	}
 	
-	static private void procesar(int numero)
-	{
-		
-		long TInicio, TFin, tiempo; //Variables para determinar el tiempo de ejecución
-		long IntervaloMaximo=50;
-		TInicio = System.currentTimeMillis(); 
-		int numeroActual=numero;
-		int intentos=0;
-		System.out.println("arrancando bucle proceso....");
-		while (numeroActual!=1 && System.currentTimeMillis()>(TInicio+IntervaloMaximo))
-		{
-			System.out.println("intento:" +intentos);
-			//todo: delay
-			if(numeroActual%2==0)//es par
-			{numeroActual=numeroActual/2;}
-			else
-			{numeroActual+=3;}
-			intentos++;
-		}
-		System.out.println("numero inicizl="+numero);
-		System.out.println("numero final="+numeroActual);
-		System.out.println("intentos="+intentos);
-		
-	}
+
 
 }
