@@ -1,42 +1,32 @@
 package main;
 
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import Leedor.Leedor;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
-		//abrir
-		
+		List<DatosProceso> datosProcesos=new ArrayList<DatosProceso>();
 		String ArchivoConNumeros="numeros.txt";
-		Leedor leedor=new Leedor(ArchivoConNumeros);
 		String cadenaNumeros="";
 		Procesador procesador=new Procesador();
 		try{
-		
-			cadenaNumeros=leedor.leer();
-			System.out.println("cadena="+cadenaNumeros);
-			
-			
-
-			int numeros[]=extraerNumeros(cadenaNumeros);
-
-			System.out.println(Arrays.toString(numeros));
-			System.out.println(numeros.length+" items extraidos.");
+			Leedor leedor=new Leedor(ArchivoConNumeros);
+			cadenaNumeros=leedor.leer(); 					System.out.println("cadena="+cadenaNumeros);
+			int numeros[]=extraerNumeros(cadenaNumeros);	System.out.println(numeros.length+" items extraidos: "+Arrays.toString(numeros));
 			for(int i=0;i<numeros.length;i++)
 			{
-				System.out.println("> procesando "+i+" item");
-				procesador.procesar(numeros[i]);
-				System.out.println("< procesando "+i+" item");
+				datosProcesos.add(procesador.procesar(numeros[i]));
 			}
+			
+			
+			
+			
 		} catch (Exception e)
 		{
 			System.out.println(e.getMessage());

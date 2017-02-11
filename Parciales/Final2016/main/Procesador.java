@@ -4,7 +4,7 @@ public class Procesador {
 	private int numero;
 	public Procesador(){};
 	public Procesador(int numero){this.numero=numero;}
-	public void procesar(int numero) throws InterruptedException
+	public DatosProceso procesar(int numero) throws InterruptedException
 	{
 		System.out.println("- arrancando proceso...");
 		long TInicio, TFin, TDelay=50,TIntervaloMaximo=5000;
@@ -23,12 +23,15 @@ public class Procesador {
 			//System.out.println("- numero actual: " + numeroActual);
 			intentos++;
 		}
+		long tiempototal=System.currentTimeMillis()-TInicio;
+		return new DatosProceso(numero, numeroActual, intentos, tiempototal);
+		/*
 		System.out.println((numeroActual==1)?"Exito!!!":"Fracaso...");
 		System.out.println("* numero inicizl="+numero);
 		System.out.println("* numero final="+numeroActual);
 		System.out.println("* intentos="+intentos);
-		long tiempototal=System.currentTimeMillis()-TInicio;
+
 		System.out.println("* tiempo invertido: "+tiempototal);
-		
+		*/
 	}
 }
