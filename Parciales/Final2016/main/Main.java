@@ -14,6 +14,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		List<DatosProceso> datosProcesos=new ArrayList<DatosProceso>();
+		List<Procesador> procesadores=new ArrayList<Procesador>();
+				
 		String ArchivoConNumeros="numeros.txt";
 		String cadenaNumeros="";
 		Procesador procesador=new Procesador();
@@ -23,7 +25,10 @@ public class Main {
 			int numeros[]=extraerNumeros(cadenaNumeros);	System.out.println(numeros.length+" items extraidos: "+Arrays.toString(numeros));
 			for(int i=0;i<numeros.length;i++)
 			{
-				datosProcesos.add(procesador.procesar(numeros[i]));
+				DatosProceso datoProceso=new DatosProceso(numeros[i]);
+				datosProcesos.add(datoProceso);
+				procesadores.add(new Procesador(datoProceso));
+				//datosProcesos.add(procesador.procesar(numeros[i]));
 			}
 			
 			Collections.sort(datosProcesos, new DatosProcesoComparator());

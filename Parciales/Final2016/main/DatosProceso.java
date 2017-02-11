@@ -15,9 +15,7 @@ public class DatosProceso {
 	public int getNumeroInicial() {
 		return numeroInicial;
 	}
-	public void setNumeroInicial(int numeroInicial) {
-		this.numeroInicial = numeroInicial;
-	}
+
 	public int getNumeroFinal() {
 		return numeroFinal;
 	}
@@ -31,12 +29,10 @@ public class DatosProceso {
 		this.intentos = intentos;
 	}
 	
-	public DatosProceso( int numeroInicial, int numeroFinal, int intentos, long tiempoProceso)
+	public DatosProceso( int numeroInicial)
 	{
 		
 		this.numeroInicial=numeroInicial;
-		this.numeroFinal=numeroFinal;
-		this.intentos=intentos;
-		this.tiempoProceso=tiempoProceso;
+
 	}
 }

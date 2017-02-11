@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Leedor {
 	String nombreArchivo;
-	private FileReader fr=null;
+
 	public Leedor(String nombreArchivo){
 		this.nombreArchivo=nombreArchivo;
 		
@@ -20,26 +20,25 @@ public class Leedor {
 	public String leer() throws Exception
 	{
 		String cadena="";
-		System.out.println("abriendo archivo..");
+		FileReader fr=null;
 		try {
 			 fr = new FileReader(nombreArchivo);
-			 System.out.println("leyendo archivo...");
-			 cadena=leerPorLinea();
+			 cadena=leerPorLinea(fr);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			throw new Exception("no se pudo abrir el archivo");
-			//e.printStackTrace();
-		} finally {
+		} catch (IOException e) {
+			throw new Exception(e.getMessage());
+		} 
+		finally {
 			if (fr!=null)
 			{
 				System.out.println("cerrando...");
 				try {
 					fr.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+
 					throw new Exception("no se pudo cerrar el archivo");
-					
-					
+
 				}
 			}
 
@@ -48,33 +47,13 @@ public class Leedor {
 
 	}
 	
-	public String leerPorCaracter()
-	{
-		String cadena="";
-		try {
 
-            int valor=fr.read();
-            while(valor!=-1){
-                System.out.print((char)valor);
-                valor=fr.read();
-            }
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		return cadena;
-
-	}
-	public String leerPorLinea()
+	public String leerPorLinea(FileReader fr) throws IOException
 	{		  
 		String cadena="";
 		String linea="";
 		BufferedReader b = new BufferedReader(fr);
-		System.out.println("entrando al bucle");
-		//extraigo string del archivo;
+
 		try {
 			linea = b.readLine();
 			while(linea!=null){
@@ -83,7 +62,7 @@ public class Leedor {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new IOException("no se pudo leer los datos");
 		}
 		return cadena;
 	}

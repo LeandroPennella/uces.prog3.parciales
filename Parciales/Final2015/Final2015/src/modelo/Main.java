@@ -15,38 +15,38 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		File f = new File("C:/numeros.txt");
-		List <Verificador> v = new ArrayList <Verificador>();
-		List <Numero> num = new ArrayList <Numero>();
+		List <Verificador> verificadores = new ArrayList <Verificador>(); //v
+		List <Numero> numeros = new ArrayList <Numero>();						//num
 		
 		BufferedReader in = null;
 				
 		try {
 			in = new BufferedReader(new FileReader(f));
 		
-			String aux = in.readLine();
-			Numero n = null;
+			String linea = in.readLine();//aux
+			Numero numero = null;			//N
 			
-			while(aux != null){
-				n = new Numero(Integer.parseInt(aux));
-				num.add(n);
-				v.add(new Verificador(n));
-				aux = in.readLine();
+			while(linea != null){
+				numero = new Numero(Integer.parseInt(linea));
+				numeros.add(numero);
+				verificadores.add(new Verificador(numero));
+				linea = in.readLine();
 			}
 			
 			
-			for (Verificador verificador : v) {
+			for (Verificador verificador : verificadores) {
 				verificador.start();
 			}
 				
 			Thread.sleep(5000);
 					
-			for (Verificador verificador : v) {
+			for (Verificador verificador : verificadores) {
 				verificador.interrupt();
 			}
 			
-			Collections.sort(num, new CompNumero());
+			Collections.sort(numeros, new CompNumero());
 			
-			for (Numero numero : num) {
+			for (Numero numero : numeros) {
 				System.out.println(numero.toString());
 			}
 			
