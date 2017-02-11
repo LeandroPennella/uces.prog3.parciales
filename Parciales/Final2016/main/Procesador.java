@@ -6,12 +6,12 @@ public class Procesador {
 	public Procesador(int numero){this.numero=numero;}
 	public DatosProceso procesar(int numero) throws InterruptedException
 	{
-		System.out.println("- arrancando proceso...");
+		System.out.println("- arrancando proceso para "+numero+"...");
 		long TInicio, TFin, TDelay=50,TIntervaloMaximo=5000;
 		TInicio = System.currentTimeMillis(); 
 		int numeroActual=numero;
 		int intentos=0;
-		System.out.println("- arrancando bucle proceso....");
+
 		while (numeroActual!=1 && System.currentTimeMillis()<(TInicio+TIntervaloMaximo))
 		{
 			//System.out.println("intento:" +intentos);

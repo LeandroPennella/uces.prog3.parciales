@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.Collections;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -24,7 +26,16 @@ public class Main {
 				datosProcesos.add(procesador.procesar(numeros[i]));
 			}
 			
+			Collections.sort(datosProcesos, new DatosProcesoComparator());
 			
+			for(DatosProceso datosProceso : datosProcesos)
+			{
+				System.out.println("------------");
+				System.out.println("numeroInicial="+datosProceso.getNumeroInicial());
+				System.out.println("numeroFinal="+datosProceso.getNumeroFinal());
+				System.out.println("intentos="+datosProceso.getIntentos());
+				System.out.println("tiempoProceso="+datosProceso.getTiempoProceso());
+			}
 			
 			
 		} catch (Exception e)
