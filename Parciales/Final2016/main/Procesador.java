@@ -1,6 +1,6 @@
 package main;
 
-public class Procesador extends Thread{
+public class Procesador implements Runnable{
 	private DatosProceso datosProceso;
 	public Procesador(){};
 	public Procesador(DatosProceso datosProceso) throws InterruptedException{
@@ -13,18 +13,14 @@ public class Procesador extends Thread{
 		System.out.println("- arrancando proceso para "+numero+"...");
 		long TDelay=50;
 
-
 		int numeroActual=numero;
 		int intentos=0;
 
 		try {
 			while (numeroActual!=1 )
 			{
-				
-				
-					//todo: try arriba de while? porque?
-					
-					Thread.sleep(TDelay);
+
+				Thread.sleep(TDelay);
 				
 				if(numeroActual%2==0){	//es par
 					numeroActual/=2;
@@ -36,7 +32,7 @@ public class Procesador extends Thread{
 			}
 		} catch (InterruptedException e) {
 			//todo: thorwear excepcion
-			System.out.println("thread interrumpido");
+			System.out.println("thread " +numero+" interrumpido");
 		}
 
 finally{

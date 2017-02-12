@@ -14,8 +14,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		List<DatosProceso> datosProcesos=new ArrayList<DatosProceso>();
-		List<Procesador> procesadores=new ArrayList<Procesador>();
-				
+		//List<Procesador> procesadoresR=new ArrayList<Procesador>();
+		List<Thread> procesadoresT=new ArrayList<Thread>();
 		String ArchivoConNumeros="numeros.txt";
 		long TInicio, TFin, TIntervaloMaximo=5000;
 		TInicio = System.currentTimeMillis(); 
@@ -28,21 +28,21 @@ public class Main {
 			{
 				DatosProceso datoProceso=new DatosProceso(numeros[i]);
 				datosProcesos.add(datoProceso);
-				procesadores.add(new Procesador(datoProceso));
-
+				//procesadoresR.add(new Procesador(datoProceso));
+				procesadoresT.add(new Thread(new Procesador(datoProceso)));
 			}
 			
 			
-			for(Procesador procesador:procesadores)
-			{procesador.start();}
+			for(Thread procesadorT:procesadoresT)
+			{procesadorT.start();}
 			
 			while(System.currentTimeMillis()<(TInicio+TIntervaloMaximo))
 			{
 				//todo:verificar si terminaron todos
 			}
 			
-			for(Procesador procesador:procesadores)
-			{procesador.interrupt();}
+			for(Thread procesadorT:procesadoresT)
+			{procesadorT.interrupt();}
 			
 			
 			//Thread.sleep(5000);
