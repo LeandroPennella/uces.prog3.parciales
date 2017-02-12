@@ -17,30 +17,38 @@ public class Main {
 		List<Procesador> procesadores=new ArrayList<Procesador>();
 				
 		String ArchivoConNumeros="numeros.txt";
-		String cadenaNumeros="";
-		Procesador procesador=new Procesador();
+		long TInicio, TFin, TIntervaloMaximo=5000;
+		TInicio = System.currentTimeMillis(); 
+
 		try{
 			Leedor leedor=new Leedor(ArchivoConNumeros);
-			cadenaNumeros=leedor.leer(); 					System.out.println("cadena="+cadenaNumeros);
-			int numeros[]=extraerNumeros(cadenaNumeros);	System.out.println(numeros.length+" items extraidos: "+Arrays.toString(numeros));
+			String cadenaNumeros=leedor.leer(); 					System.out.println("cadena="+cadenaNumeros);
+			int numeros[]=extraerNumeros(cadenaNumeros);			System.out.println(numeros.length+" items extraidos: "+Arrays.toString(numeros));
 			for(int i=0;i<numeros.length;i++)
 			{
 				DatosProceso datoProceso=new DatosProceso(numeros[i]);
 				datosProcesos.add(datoProceso);
 				procesadores.add(new Procesador(datoProceso));
-				//datosProcesos.add(procesador.procesar(numeros[i]));
+
 			}
 			
+			
+			for(Procesador procesador:procesadores)
+			{procesador.start();}
+			
+			while(System.currentTimeMillis()<(TInicio+TIntervaloMaximo))
+			{
+				//todo:verificar si terminaron todos
+			}
+			
+			for(Procesador procesador:procesadores)
+			{procesador.interrupt();}
+			
+			
+			//Thread.sleep(5000);
 			Collections.sort(datosProcesos, new DatosProcesoComparator());
 			
-			for(DatosProceso datosProceso : datosProcesos)
-			{
-				System.out.println("------------");
-				System.out.println("numeroInicial="+datosProceso.getNumeroInicial());
-				System.out.println("numeroFinal="+datosProceso.getNumeroFinal());
-				System.out.println("intentos="+datosProceso.getIntentos());
-				System.out.println("tiempoProceso="+datosProceso.getTiempoProceso());
-			}
+			imprimirDatos(datosProcesos);
 			
 			
 		} catch (Exception e)
@@ -52,7 +60,17 @@ public class Main {
 		
 	}
 	
+static private void imprimirDatos(List<DatosProceso>datosProcesos)
+{			
+	for(DatosProceso datosProceso : datosProcesos)
+	{
+		System.out.println("------------");
+		System.out.println("numeroInicial="+datosProceso.getNumeroInicial());
+		System.out.println("numeroFinal="+datosProceso.getNumeroFinal());
+		System.out.println("intentos="+datosProceso.getIntentos());
 
+	}
+}
 	
 	static private int[] extraerNumeros(String cadenaNumeros)
 	{

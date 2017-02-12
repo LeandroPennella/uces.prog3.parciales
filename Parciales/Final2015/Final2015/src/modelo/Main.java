@@ -56,9 +56,11 @@ public class Main {
 			
 		} catch (IOException e) {
 			System.out.println("No se pudo leer el archivo");	
-		}catch (InterruptedException e) {
+			
+		} catch (InterruptedException e) {
 			System.out.println("Main Interrumpido");
-		}finally{
+		
+		} finally{
 			if(in != null){
 				try {
 					in.close();
@@ -68,9 +70,7 @@ public class Main {
 			}
 		}
 		
-		
 		System.out.println("--- Fin del Main ---");
-		
 		
 	}
 

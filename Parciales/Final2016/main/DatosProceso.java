@@ -1,17 +1,12 @@
 package main;
 
 public class DatosProceso {
-	private long tiempoProceso;
+
 	private int numeroInicial;
 	private int numeroFinal;
 	private int intentos;
 	
-	public long getTiempoProceso() {
-		return tiempoProceso;
-	}
-	public void setTiempoProceso(long tiempoProceso) {
-		this.tiempoProceso = tiempoProceso;
-	}
+
 	public int getNumeroInicial() {
 		return numeroInicial;
 	}
