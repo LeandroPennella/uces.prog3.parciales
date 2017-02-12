@@ -22,6 +22,7 @@ public class Leedor {
 		String cadena="";
 		FileReader fr=null;
 		try {
+			System.out.println("abriendo...");
 			 fr = new FileReader(nombreArchivo);
 			 cadena=leerPorLinea(fr);
 		} catch (FileNotFoundException e) {
@@ -50,6 +51,7 @@ public class Leedor {
 
 	public String leerPorLinea(FileReader fr) throws IOException
 	{		  
+		System.out.println("leyendo...");
 		String cadena="";
 		String linea="";
 		BufferedReader b = new BufferedReader(fr);

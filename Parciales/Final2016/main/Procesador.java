@@ -36,7 +36,7 @@ public class Procesador extends Thread{
 			}
 		} catch (InterruptedException e) {
 			//todo: thorwear excepcion
-			System.out.println("thread interrumpido");
+			System.out.println("thread " +numero+" interrumpido");
 		}
 
 finally{
